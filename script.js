@@ -21,10 +21,12 @@ observer.observe(document, config);
 async function runScript(){
   const urlPattern = /https:\/\/reservecalifornia.com\/Web\/.+\/.+\/.+/;
   const urlMatched = urlPattern.test(window.location.href);
-  if (urlMatched) loadColors()
+  if (urlMatched) {
+    loadColors()
+    await sleep(refreshTimer)
+    return runScript() 
+  } 
   else console.log("URL no match")
-  await sleep(refreshTimer)
-  runScript()
 }
 
 async function loadColors(){
